@@ -1241,27 +1241,6 @@ void CLI::runCommand(String input) {
     else if (eqlsCMD(0, CLI_STOPAP)) {
         wifi::stopAP();
     }
-
-    // ===== SCREEN ===== //
-    // screen mode <menu/packetmonitor/buttontest/loading>
-    else if (eqlsCMD(0, CLI_SCREEN) && eqlsCMD(1, CLI_MODE)) {
-        if (eqlsCMD(2, CLI_MODE_BUTTONTEST)) displayUI.mode = DISPLAY_MODE::BUTTON_TEST;
-        else if (eqlsCMD(2, CLI_MODE_PACKETMONITOR)) displayUI.mode = DISPLAY_MODE::PACKETMONITOR;
-        else if (eqlsCMD(2, CLI_MODE_LOADINGSCREEN)) displayUI.mode = DISPLAY_MODE::LOADSCAN;
-        else if (eqlsCMD(2, CLI_MODE_MENU)) displayUI.mode = DISPLAY_MODE::MENU;
-        else parameterError(list->get(2));
-        prntln(CLI_CHANGED_SCREEN);
-    }
-
-    // screen <on/off>
-    else if (eqlsCMD(0, CLI_SCREEN) && (eqlsCMD(1, CLI_ON) || eqlsCMD(1, CLI_OFF))) {
-        if (eqlsCMD(1, CLI_ON)) {
-            displayUI.on();
-        } else if (eqlsCMD(1, CLI_OFF)) {
-            displayUI.off();
-        }
-    }
-
     // ===== NOT FOUND ===== //
     else {
         prnt(CLI_ERROR_NOT_FOUND_A);

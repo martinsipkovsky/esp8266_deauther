@@ -14,7 +14,6 @@ extern "C" {
 #include "SSIDs.h"
 #include "Scan.h"
 #include "Attack.h"
-#include "DisplayUI.h"
 #include "led.h"
 
 extern Names names;
@@ -23,7 +22,6 @@ extern Accesspoints accesspoints;
 extern Stations     stations;
 extern Scan   scan;
 extern Attack attack;
-extern DisplayUI displayUI;
 extern uint32_t  currentTime;
 extern uint32_t  autosaveTime;
 
