@@ -13,6 +13,8 @@ extern "C" {
 #include <ESP8266mDNS.h>
 #include <LittleFS.h>
 
+//#include <ESP2SOTA.h>
+
 #include "language.h"
 #include "debug.h"
 #include "settings.h"
@@ -53,6 +55,8 @@ namespace wifi {
     DNSServer dns;
     IPAddress ip WEB_IP_ADDR;
     IPAddress    netmask(255, 255, 255, 0);
+
+    
 
     void setPath(String path) {
         if (path.charAt(0) != '/') {
@@ -267,6 +271,8 @@ namespace wifi {
         dns.start(53, "*", ip);
 
         MDNS.begin(WEB_URL);
+
+        //ESP2SOTA.begin(&server);
 
         server.on("/list", HTTP_GET, handleFileList); // list directory
 
