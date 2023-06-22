@@ -124,3 +124,67 @@ window.addEventListener('load', function () {
 	getE("status").style.backgroundColor = "#3c5";
 	getE("status").innerHTML = "connected";
 });
+
+
+
+// battery level here
+
+// bat level updater loop
+update_batLevel();
+function update_batLevel() {
+    getBatteryLevel();
+
+    const intervalId = setInterval(function() {
+        
+        update_batLevel();
+        
+        clearInterval(intervalId);
+        
+        return
+      }, 5000);
+
+      
+      return
+}
+
+function getBatteryLevel() {
+	getFile("APIEvent_batLevel", update_batLevel2);
+
+  	//update_batLevel2("899");
+}
+
+function update_batLevel2(batteryLevel_raw) {
+	// convert the value from esp analog pin to a percentage
+	let batteryLevel = (batteryLevel_raw - 790)/2;
+
+    // change icon color
+    levelString = batteryLevel.toString();
+
+    var color = "#fff";
+    const batteryIcon = document.getElementById("battery-icon");
+
+	if (batteryLevel < 102 && batteryLevel > 100) {
+		batteryLevel = 100;
+	}
+
+    if (batteryLevel > 100) {
+      color = "#20c20e";
+      levelString = "100";
+      batteryIcon.textContent = `⚡`;
+    } else if (batteryLevel > 60) {
+      color = "#20c20e";
+      batteryIcon.textContent = `${batteryLevel}%`;
+    } else if (batteryLevel > 30) {
+      color = "#FAA61A";
+      batteryIcon.textContent = `${batteryLevel}%`;
+    } else {
+      color = "#F04747";
+      batteryIcon.textContent = `${batteryLevel}%`;
+    }
+
+    getE("battery-icon").style.background = "linear-gradient(to right, "+color+" 0%, "+color+" "+levelString+"%, #4a4c50 "+levelString+"%, #4a4c50 100%)";
+
+    showMessage("");
+    
+    return
+}

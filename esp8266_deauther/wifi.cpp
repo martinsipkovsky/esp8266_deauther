@@ -412,6 +412,9 @@ namespace wifi {
                 handleFileRead("/web/lang/"+String(settings::getWebSettings().lang)+".lang");
             }
         });
+        server.on("/APIEvent_batLevel", HTTP_GET, []() {
+                server.send(200, "text/plain", String(analogRead(A0)).c_str());
+            });
         // ================================================================
         #endif /* ifdef USE_PROGMEM_WEB_FILES */
 
